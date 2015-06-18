@@ -1,1 +1,22 @@
-/* CSS declarations go here */
+.fcRow {
+   display: -webkit-flex;
+   display: flex;
+   -webkit-flex-direction: row;
+   flex-direction: row;
+   justify-content: space-between;
+   align-items: center;
+}
+
+body {
+	margin:0px;
+}
+
+#header {
+	height: 40px;
+	background-color: #eee;
+	padding: 0px 10px;
+}
+
+#addButton {
+	cursor: pointer;
+}

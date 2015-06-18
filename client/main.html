@@ -2,10 +2,42 @@
 	<title>Chatrooms</title>
 </head>
 
+<template name="mainLayout">
+  {{> Template.dynamic template=top}}
+  {{> Template.dynamic template=main}}
+</template>
+
 <template name="rooms">
-	List of chatrooms
+	<div id="header" class="fcRow">
+		<i class="fa fa-lg fa-plus-circle" id="addButton"></i>
+		Chatrooms
+		<i class="fa fa-lg fa-user"></i>
+	</div>
+
+	<div id="roomList">
+		<ul>
+		{{#each roomList}}
+			<li><a href="/room/{{_id}}">{{name}}</a></li>
+		{{/each}}
+		</ul>
+	</div>
 </template>
 
 <template name="room">
-	A chat room
+	<div id="header" class="fcRow">
+		<i class="fa fa-lg fa-plus-circle" id="backButton"></i>
+		{{title}}
+		<i class="fa fa-lg fa-user"></i>
+	</div>
+
+	<div id="chatroom">
+		{{#each log}}
+			{{message}}<br>
+		{{/each}}
+		
+		<form class="logEntry">
+			<input class="logInput" type="text" placeholder="Your message..."/>
+			<button type="button">Submit</button>
+		</form>
+	</div>
 </template>

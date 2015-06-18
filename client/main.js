@@ -1,23 +1,54 @@
-if (Meteor.isClient) {
-  // counter starts at 0
-  Session.setDefault('counter', 0);
+Template.rooms.helpers({
+  roomList: function () {
+    return Rooms.find();
+  }
+});
 
-  Template.hello.helpers({
-    counter: function () {
-      return Session.get('counter');
+Template.rooms.events({
+  'click #addButton': function () {
+    console.log('clicked on addButton');
+    Meteor.call('createNewRoom', function(err, data){
+      console.log('Created room '+data);
+      FlowRouter.go('/room/'+data);
+    });
+    return false;
+  }
+});
+
+Template.room.helpers({
+  isReady: function(sub) {
+    if(sub) {
+      return FlowRouter.subsReady(sub);
+    } else {
+      return FlowRouter.subsReady();
     }
-  });
-
-  Template.hello.events({
-    'click button': function () {
-      // increment the counter when button is clicked
-      Session.set('counter', Session.get('counter') + 1);
+  },
+  title:function(){
+    if(FlowRouter.subsReady()){
+      return Rooms.findOne(FlowRouter.getParam("roomId")).name;
+    } else {
+      return "Loading...";
     }
-  });
-}
+  },
+  log:function(){
+    if(FlowRouter.subsReady()){
+      // console.log(Rooms.findOne(FlowRouter.getParam("roomId")).log);
+      return Rooms.findOne(FlowRouter.getParam("roomId")).log;
+    } else {
+      return [{"message":"Loading..."}];
+    }
+  }
+});
 
-if (Meteor.isServer) {
-  Meteor.startup(function () {
-    // code to run on server at startup
-  });
-}
+Template.room.events({
+  "submit .logEntry": function(e,t){
+    // var text = e.target.text.value;
+    e.preventDefault();
+    var text = $(".logInput").val();
+    console.log("logEntry: "+text);
+    Meteor.call("addLogEntry", FlowRouter.getParam("roomId"), text);
+    // e.target.text.value = "";
+    $(".logInput").val("");
+    return false;
+  }
+});
