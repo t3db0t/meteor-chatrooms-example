@@ -33,6 +33,22 @@ Template.room.helpers({
   }
 });
 
+Template.room.created = function(){
+  console.log("room created");
+  this.autorun(function(){
+    if(FlowRouter.subsReady()){
+      var logData = Rooms.findOne(FlowRouter.getParam("roomId")).log;
+    }
+    console.log("autorun: "+$('#chatLog').prop('scrollHeight'));
+  // FlowRouter.subsReady("room", function() {
+    // console.log("subsReady");
+    $('#chatLog').scrollTop($('#chatLog').prop('scrollHeight'));
+  // });
+  })
+  
+  
+};
+
 Template.room.events({
   'click #backButton': function (){
     FlowRouter.go('/');
