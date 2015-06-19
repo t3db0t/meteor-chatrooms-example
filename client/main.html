@@ -1,5 +1,5 @@
 <head>
-	<title>Chatrooms</title>
+	<title>Campchat</title>
   	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 </head>
 
@@ -11,7 +11,7 @@
 <template name="rooms">
 	<div id="header" class="fc fcRow">
 		<i class="fa fa-2x fa-plus-circle clickable" id="addButton"></i>
-		Chatrooms
+		Campchat
 		<i class="fa fa-2x fa-user"></i>
 	</div>
 
@@ -32,19 +32,17 @@
 			<i class="fa fa-2x fa-user"></i>
 		</div>
 
-		<!-- <div id="chatRoom"> -->
-			<div id="chatLog">
-				{{#each log}}
-					{{message}}<br>
-				{{/each}}
-			</div>
+		<div id="chatLog">
+			{{#each log}}
+				{{message}}<br>
+			{{/each}}
+		</div>
 
-			<div id="chatInput" class="fc">
-				<form class="logEntry">
-					<input class="logInput" type="text" placeholder="Your message..."/>
-					<button type="submit">Send</button>
-				</form>
-			</div>
-		<!-- </div> -->
+		<div id="chatFooter">
+			<form class="logEntry fc">
+				<input class="logInput" type="text" placeholder="Your message..." />
+				<button type="submit">Send</button>
+			</form>
+		</div>
 	</div>
 </template>
