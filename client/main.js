@@ -5,7 +5,7 @@ Template.rooms.helpers({
 });
 
 Template.rooms.events({
-  'click #addButton': function () {
+  'click #addButton': function (){
     console.log('clicked on addButton');
     Meteor.call('createNewRoom', function(err, data){
       console.log('Created room '+data);
@@ -16,13 +16,6 @@ Template.rooms.events({
 });
 
 Template.room.helpers({
-  isReady: function(sub) {
-    if(sub) {
-      return FlowRouter.subsReady(sub);
-    } else {
-      return FlowRouter.subsReady();
-    }
-  },
   title:function(){
     if(FlowRouter.subsReady()){
       return Rooms.findOne(FlowRouter.getParam("roomId")).name;
@@ -41,10 +34,15 @@ Template.room.helpers({
 });
 
 Template.room.events({
-  "submit .logEntry": function(e,t){
+  'click #backButton': function (){
+    FlowRouter.go('/');
+    return false;
+  },
+  'submit .logEntry': function(e,t){
     // var text = e.target.text.value;
     e.preventDefault();
-    var text = $(".logInput").val();
+    var text = $(".logInput").val().trim();
+    if(text=="") return false;
     console.log("logEntry: "+text);
     Meteor.call("addLogEntry", FlowRouter.getParam("roomId"), text);
     // e.target.text.value = "";

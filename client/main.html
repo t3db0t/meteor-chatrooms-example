@@ -1,5 +1,6 @@
 <head>
 	<title>Chatrooms</title>
+  	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 </head>
 
 <template name="mainLayout">
@@ -8,10 +9,10 @@
 </template>
 
 <template name="rooms">
-	<div id="header" class="fcRow">
-		<i class="fa fa-lg fa-plus-circle" id="addButton"></i>
+	<div id="header" class="fc fcRow">
+		<i class="fa fa-2x fa-plus-circle clickable" id="addButton"></i>
 		Chatrooms
-		<i class="fa fa-lg fa-user"></i>
+		<i class="fa fa-2x fa-user"></i>
 	</div>
 
 	<div id="roomList">
@@ -24,20 +25,26 @@
 </template>
 
 <template name="room">
-	<div id="header" class="fcRow">
-		<i class="fa fa-lg fa-plus-circle" id="backButton"></i>
-		{{title}}
-		<i class="fa fa-lg fa-user"></i>
-	</div>
+	<div class="fc fcColumn">
+		<div id="header" class="fc fcRow">
+			<i class="fa fa-2x fa-chevron-left clickable" id="backButton"></i>
+			{{title}}
+			<i class="fa fa-2x fa-user"></i>
+		</div>
 
-	<div id="chatroom">
-		{{#each log}}
-			{{message}}<br>
-		{{/each}}
-		
-		<form class="logEntry">
-			<input class="logInput" type="text" placeholder="Your message..."/>
-			<button type="button">Submit</button>
-		</form>
+		<!-- <div id="chatRoom"> -->
+			<div id="chatLog">
+				{{#each log}}
+					{{message}}<br>
+				{{/each}}
+			</div>
+
+			<div id="chatInput" class="fc">
+				<form class="logEntry">
+					<input class="logInput" type="text" placeholder="Your message..."/>
+					<button type="submit">Send</button>
+				</form>
+			</div>
+		<!-- </div> -->
 	</div>
 </template>
