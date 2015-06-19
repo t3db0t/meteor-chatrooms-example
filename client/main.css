@@ -60,9 +60,11 @@ html, body {
 
 .logInput {
 	height: 25px;
+	-webkit-flex: 1 0 8em;
 	flex: 1 0 8em;
 }
 
 .logEntry button {
-	flex:0 0 auto;
+	-webkit-flex: 0 0 auto;
+	flex: 0 0 auto;
 }
